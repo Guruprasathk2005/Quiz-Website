@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GP Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <h1 class="title">GP Quiz</h1>
+
+  <!-- Join Section -->
+  <div id="join-section">
+    <input type="text" id="userName" placeholder="Enter Your Name">
+    <input type="email" id="userEmail" placeholder="Enter Your Email">
+    <input type="text" id="joinCode" placeholder="Enter Join Code">
+    <button id="startBtn">Start Quiz</button>
+    <p class="error" id="joinError"></p>
+  </div>
+
+  <!-- Quiz Section -->
+  <div id="quiz-section" style="display:none;">
+    <div class="quiz-header">
+      <span id="progress"></span>
+      <span id="timer"></span>
+    </div>
+    <div id="question" class="question-text"></div>
+    <div class="answers" id="answers"></div>
+    <div class="nav-buttons">
+      <button onclick="prevQuestion()">Previous</button>
+      <button onclick="nextQuestion()">Next</button>
+      <button onclick="submitQuiz()">Submit</button>
+    </div>
+  </div>
+
+  <!-- Review Section -->
+  <div id="review-section" style="display:none;">
+    <h2>Review Your Answers</h2>
+    <div id="review-buttons" class="review-buttons"></div>
+    <button id="finishBtn">Finish Quiz</button>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
