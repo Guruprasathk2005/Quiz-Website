@@ -2,7 +2,7 @@ let questions = [], currentQ = 0, score = 0, timer, timeLeft;
 let userAnswers = [];
 let quizUser = {};
 
-const sheetURL = "https://script.google.com/macros/s/AKfycbyIzzYjQYMQ7kVrMxOXmn6w3MSS-ihKPA0jNwtbkzVpCDhoj-_GvZmGBhQRo430IfaS/exec"; // Replace with your Apps Script Web App URL
+const sheetURL = "https://script.google.com/macros/s/AKfycbyIzzYjQYMQ7kVrMxOXmn6w3MSS-ihKPA0jNwtbkzVpCDhoj-_GvZmGBhQRo430IfaS/exec"; 
 
 document.getElementById("startBtn").onclick = validateJoinCode;
 
@@ -65,7 +65,7 @@ function startTimer(){
   timer=setInterval(()=>{
     if(timeLeft<=0){ 
       clearInterval(timer);
-      finishQuiz(true);  // auto-finish if time runs out
+      finishQuiz(true);  
       return; 
     }
     timeLeft--; updateTimer();
@@ -77,7 +77,7 @@ function updateTimer(){
 }
 
 function submitQuiz(){
-  // 🚫 Don't stop timer here (timer keeps running in review)
+ 
   document.getElementById("quiz-section").style.display="none";
   document.getElementById("review-section").style.display="block";
 
@@ -100,19 +100,19 @@ function submitQuiz(){
 }
 
 function finishQuiz(auto=false){
-  clearInterval(timer); // ✅ Stop timer only at finish
+  clearInterval(timer); 
   if(!auto){
     if(!confirm("Are you sure to finish?")) {
-      startTimer(); // resume timer if cancelled
+      startTimer(); 
       return;
     }
   }
 
-  // calculate score
+  
   score=0;
   questions.forEach((q,i)=>{ if(userAnswers[i]!==null && q.options[userAnswers[i]]===q.correct) score++; });
 
-  // format time taken
+ 
   const totalSeconds = quizUser.quizTimer - timeLeft;
   let timeTakenFormatted = "";
   if(totalSeconds < 60) timeTakenFormatted = `${totalSeconds} sec`;
@@ -122,7 +122,7 @@ function finishQuiz(auto=false){
     timeTakenFormatted = `${m}:${s.toString().padStart(2,"0")} min`;
   }
 
-  // send to sheet
+  
   const payload={ 
     name:quizUser.name,
     email:quizUser.email,
@@ -133,6 +133,7 @@ function finishQuiz(auto=false){
   fetch(sheetURL,{method:"POST",body:JSON.stringify(payload)})
     .then(res=>res.json()).then(d=>{ window.location.href="thankyou.html"; });
 }
+
 
 
 
